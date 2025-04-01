@@ -8,20 +8,48 @@
         body {
             text-align: center;
             margin-top: 50px;
+            font-family: Arial, sans-serif;
         }
         img {
             cursor: pointer;
             max-width: 90%;
             height: auto;
         }
+        #counter {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            display: none; /* Initially hidden */
+        }
     </style>
 </head>
 <body>
+
     <img id="prankImage" src="IMG-20250401-WA0002.jpg" onclick="swapImage()">
-</body>
+    <h2 id="counter">Maza aa gaye 🤫 -> <span id="count">6</span></h2>
+
     <script>
+        // Function to update and display the counter, starting from 6
+        function updateCounter() {
+            let count = localStorage.getItem("visitorCount");
+
+            if (!count || count < 6) {
+                count = 6; // Start from 6
+            } else {
+                count++;
+            }
+
+            localStorage.setItem("visitorCount", count);
+            document.getElementById("count").innerText = count;
+        }
+
+        // Function to swap the image and show the counter
         function swapImage() {
             document.getElementById("prankImage").src = "IMG-20250401-WA0001.jpg";
+            document.getElementById("counter").style.display = "block"; // Show counter
+            updateCounter(); // Update and show counter
         }
     </script>
+
+</body>
 </html>
